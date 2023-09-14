@@ -221,6 +221,11 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
 
         lockPanelTgl.setText("Lock Panel");
         lockPanelTgl.setName("lockPanelTgl"); // NOI18N
+        lockPanelTgl.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                lockPanelTglStateChanged(evt);
+            }
+        });
 
         termProgress.setStringPainted(true);
 
@@ -397,6 +402,19 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
         // TODO add your handling code here:
         paintChanges();
     }//GEN-LAST:event_courseTableCaretPositionChanged
+
+    private void lockPanelTglStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_lockPanelTglStateChanged
+        
+        if(lockPanelTgl.isSelected()){
+            termEndTbf.enable(false);
+            termStartTbf.enable(false);
+        }
+        else{
+            termEndTbf.enable(true);
+            termStartTbf.enable(true);
+            
+        }
+    }//GEN-LAST:event_lockPanelTglStateChanged
 
     /**
      * @param args the command line arguments

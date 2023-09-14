@@ -135,6 +135,9 @@
             <Property name="text" type="java.lang.String" value="Lock Panel"/>
             <Property name="name" type="java.lang.String" value="lockPanelTgl" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="lockPanelTglStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JProgressBar" name="termProgress">
           <Properties>
