@@ -85,7 +85,9 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
                             3);
                     
                 }
+                lockPanelTgl.setSelected(true);
             }
+            
         }
         catch(ParsingException e){}
         catch(IOException e){}
@@ -94,16 +96,23 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
     public void paintChanges(){
         allCredits = 0;
         compCredits = 0;
-        
+        int remainingCourses = 0;
         for(int i = 1; i < courseTable.getRowCount(); i++){
                 if(courseTable.getValueAt(i-1, 1) != null){
                     if(courseTable.getValueAt(i-1, 1) != "")
                         allCredits = allCredits + Integer.parseInt(courseTable.getValueAt(i-1, 1).toString());
                     if(courseTable.getValueAt(i-1, 2) != null)
-                        if(courseTable.getValueAt(i-1, 2).toString().contains("yes"))
+                        if(courseTable.getValueAt(i-1, 2).toString().contains("yes")){
                             compCredits = compCredits + Integer.parseInt(courseTable.getValueAt(i-1, 1).toString());
+                        }
+                        else{
+                            remainingCourses++;
+                        }
+                    
+                    
                     
                     }
+                
         }
         if(allCredits != 0){
             creditProgress.setValue(compCredits);
@@ -126,8 +135,14 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
             int prog = (int) ( daysBetweenTerm - daysBetween);
             if(prog < 0)
                 termProgress.setValue(0);
-            else
+            else{
                 termProgress.setValue(prog);
+            }
+            if(remainingCourses > 0)
+                coursePerDayLbl.setText("" + (int) daysBetween/remainingCourses +" days/course");
+            else
+                coursePerDayLbl.setText("No Courses to Do");
+            
             
             System.out.println(prog +"/" + daysBetweenTerm);
         } catch (ParseException ex) {
@@ -211,6 +226,7 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        coursePerDayLbl = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -243,6 +259,8 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
 
         jLabel6.setText("Term Progress");
 
+        coursePerDayLbl.setText("Need Courses and End Date");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,6 +282,8 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(termEndTbf, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(coursePerDayLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lockPanelTgl))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -289,7 +309,8 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
                     .addComponent(termEndTbf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(lockPanelTgl)))
+                    .addComponent(lockPanelTgl)
+                    .addComponent(coursePerDayLbl)))
         );
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -408,10 +429,12 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
         if(lockPanelTgl.isSelected()){
             termEndTbf.enable(false);
             termStartTbf.enable(false);
+            lockPanelTgl.setText("Panel Locked");
         }
         else{
             termEndTbf.enable(true);
             termStartTbf.enable(true);
+            lockPanelTgl.setText("Lock Panel");
             
         }
     }//GEN-LAST:event_lockPanelTglStateChanged
@@ -461,6 +484,7 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel coursePerDayLbl;
     public javax.swing.JTable courseTable;
     private javax.swing.JProgressBar creditProgress;
     private javax.swing.Box.Filler filler1;

@@ -89,6 +89,8 @@
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="termEndTbf" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="coursePerDayLbl" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="lockPanelTgl" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -124,6 +126,7 @@
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lockPanelTgl" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="coursePerDayLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -177,6 +180,11 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="text" type="java.lang.String" value="Term Progress"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="coursePerDayLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Need Courses and End Date"/>
           </Properties>
         </Component>
       </SubComponents>
