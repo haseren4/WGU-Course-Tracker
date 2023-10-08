@@ -21,6 +21,7 @@ import nu.xom.Element;
 import nu.xom.Elements;
 import nu.xom.ParsingException;
 import java.text.SimpleDateFormat;
+import javax.swing.JTable;
 
 /**
  *
@@ -91,6 +92,8 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
         }
         catch(ParsingException e){}
         catch(IOException e){}
+        
+        
     }
     
     public void paintChanges(){
@@ -117,6 +120,7 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
         if(allCredits != 0){
             creditProgress.setValue(compCredits);
             creditProgress.setMaximum(allCredits);
+            creditProgress.setToolTipText(compCredits + " / " + allCredits);
             
             System.out.println(compCredits + "/" + allCredits);
         }
@@ -138,10 +142,13 @@ public class MainWindow extends javax.swing.JFrame implements WindowListener{
             else{
                 termProgress.setValue(prog);
             }
-            if(remainingCourses > 0)
+            if(remainingCourses > 0){
                 coursePerDayLbl.setText("" + (int) daysBetween/remainingCourses +" days/course");
-            else
+                termProgress.setToolTipText(daysBetween + " days left.");
+            }
+            else{
                 coursePerDayLbl.setText("No Courses to Do");
+            }
             
             
             System.out.println(prog +"/" + daysBetweenTerm);
